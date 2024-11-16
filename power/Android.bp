@@ -9,3 +9,16 @@ cc_library_static {
         "libbase",
     ],
 }
+
+cc_library_shared {
+    name: "vendor.powerhal",
+    srcs: ["power-mode.cpp"],
+    shared_libs: [
+        "liblog",
+        "libutils",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+}
