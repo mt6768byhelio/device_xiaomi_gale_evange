@@ -22,6 +22,11 @@
 #include <thread>
 #include <fstream>
 #include <string>
+#include <android/log.h>
+#include <hardware/power.h>
+
+#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, "PowerHAL", __VA_ARGS__)
+
 
 namespace {
 int open_ts_input() {
