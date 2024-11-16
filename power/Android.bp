@@ -19,6 +19,9 @@ cc_library_shared {
     cflags: [
         "-Wall",
         "-Werror",
+    include_dirs: [
+    "hardware/libhardware/include/hardware",
+],
     ],
 }
 
