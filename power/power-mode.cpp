@@ -22,9 +22,9 @@
 #include <thread>
 #include <fstream>
 #include <string>
-#include <android/log.h>
+#include <log/log.h>
 #include <hardware/power.h>
-
+#define LOG_TAG "VendorPowerHal"
 #define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, "PowerHAL", __VA_ARGS__)
 
 
@@ -137,6 +137,11 @@ void powerHint(power_hint_t hint, void* data) {
             // Other hints can be addressed here
             break;
     }
+}
+
+void log_example() {
+    __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to set governor");
+    __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Operation completed successfully");
 }
 
 }  // namespace pixel
