@@ -14,17 +14,13 @@ cc_library_shared {
     name: "vendor.powerhal",
     srcs: ["power-mode.cpp"],
     shared_libs: [
-        "liblog",
         "libutils",
-        "libhardware",
     ],
     cflags: [
         "-Wall",
         "-Werror",
     ],
-    include_dirs: [
-        "include",
-    ],
 }
+
 
 
