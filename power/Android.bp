@@ -16,6 +16,7 @@ cc_library_shared {
     shared_libs: [
         "liblog",
         "libutils",
+        "libhardware",
     ],
     cflags: [
         "-Wall",
@@ -23,7 +24,3 @@ cc_library_shared {
     ],
 }
 
-shared_libs: [
-    "liblog",
-    "libhardware",
-],
