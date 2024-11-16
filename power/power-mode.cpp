@@ -18,6 +18,10 @@
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <linux/input.h>
+#include <chrono>
+#include <thread>
+#include <fstream>
+#include <string>
 
 namespace {
 int open_ts_input() {
@@ -95,6 +99,38 @@ bool setDeviceSpecificMode(Mode type, bool enabled) {
         }
         default:
             return false;
+    }
+}
+
+void setGovernor(const std::string& path, const std::string& value) {
+    std::ofstream governorFile(path);
+    if (governorFile.is_open()) {
+        governorFile << value;
+        governorFile.close();
+    } else {
+        ALOGE("Failed to set governor at %s", path.c_str());
+    }
+}
+
+void handleInteractionHint() {
+    // Change to gorvenor "performance"
+    setGovernor("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", "performance");
+
+    // Wait 50ms
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
+    // Back to gorvenor "schedutil"
+    setGovernor("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", "schedutil");
+}
+
+void powerHint(power_hint_t hint, void* data) {
+    switch (hint) {
+        case POWER_HINT_INTERACTION:
+            handleInteractionHint();
+            break;
+        default:
+            // Other hints can be addressed here
+            break;
     }
 }
 
