@@ -21,7 +21,7 @@ cc_library_shared {
         "-Werror",
     ],
     include_dirs: [
-        "hardware/libhardware/include/hardware",  # Caminho correto para os arquivos de cabeçalho
+        "hardware/libhardware/include/hardware",
     ],
 }
 
