@@ -21,7 +21,7 @@
 #include <thread>
 #include <fstream>
 #include <string>
-#include <hardware/power.h>
+#include <hardware/libhardware/include/hardware/power.h>
 #include <cstdio>  // For printf
 
 namespace {
