@@ -22,3 +22,8 @@ cc_library_shared {
         "-Werror",
     ],
 }
+
+shared_libs: [
+    "liblog",
+    "libhardware",
+],
