@@ -16,17 +16,13 @@
 
 #include <aidl/android/hardware/power/BnPower.h>
 #include <android-base/file.h>
-#include <android-base/logging.h>
 #include <linux/input.h>
 #include <chrono>
 #include <thread>
 #include <fstream>
 #include <string>
-#include <log/log.h>
 #include <hardware/power.h>
-#define LOG_TAG "VendorPowerHal"
-#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, "PowerHAL", __VA_ARGS__)
-
+#include <cstdio>  // For printf
 
 namespace {
 int open_ts_input() {
@@ -90,8 +86,8 @@ bool setDeviceSpecificMode(Mode type, bool enabled) {
         case Mode::DOUBLE_TAP_TO_WAKE: {
             int fd = open_ts_input();
             if (fd == -1) {
-                LOG(WARNING)
-                    << "DT2W won't work because no supported touchscreen input devices were found";
+                // Replacing ALOGE with printf
+                printf("Failed to set DT2W: no supported touchscreen input devices found\n");
                 return false;
             }
             struct input_event ev;
@@ -113,18 +109,19 @@ void setGovernor(const std::string& path, const std::string& value) {
         governorFile << value;
         governorFile.close();
     } else {
-        ALOGE("Failed to set governor at %s", path.c_str());
+        // Replacing ALOGE with printf
+        printf("Failed to set governor at %s\n", path.c_str());
     }
 }
 
 void handleInteractionHint() {
-    // Change to gorvenor "performance"
+    // Change to governor "performance"
     setGovernor("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", "performance");
 
     // Wait 50ms
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
-    // Back to gorvenor "schedutil"
+    // Back to governor "schedutil"
     setGovernor("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", "schedutil");
 }
 
@@ -140,8 +137,9 @@ void powerHint(power_hint_t hint, void* data) {
 }
 
 void log_example() {
-    __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to set governor");
-    __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Operation completed successfully");
+    // Replacing ALOGE with printf
+    printf("Failed to set governor\n");
+    printf("Operation completed successfully\n");
 }
 
 }  // namespace pixel
@@ -150,3 +148,4 @@ void log_example() {
 }  // namespace hardware
 }  // namespace google
 }  // namespace aidl
+
