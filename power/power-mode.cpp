@@ -21,8 +21,12 @@
 #include <thread>
 #include <fstream>
 #include <string>
-#include <hardware/libhardware/include/hardware/power.h>
 #include <cstdio>  // For printf
+#define LOG_TAG "VendorPowerHal"
+
+enum PowerHint {
+    POWER_HINT_INTERACTION = 1,
+};
 
 namespace {
 int open_ts_input() {
@@ -125,7 +129,7 @@ void handleInteractionHint() {
     setGovernor("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", "schedutil");
 }
 
-void powerHint(power_hint_t hint, void* data) {
+void powerHint(PowerHint hint, void* data) {
     switch (hint) {
         case POWER_HINT_INTERACTION:
             handleInteractionHint();
@@ -140,6 +144,11 @@ void log_example() {
     // Replacing ALOGE with printf
     printf("Failed to set governor\n");
     printf("Operation completed successfully\n");
+}
+
+int main() {
+    powerHint(POWER_HINT_INTERACTION, nullptr);
+    return 0;
 }
 
 }  // namespace pixel
