@@ -2,7 +2,7 @@
   "Nodes": [
     {
       "Name": "CPULittleClusterDownRateLimitUs",
-      "Path": "/sys/devices/system/cpu/cpufreq/policy0/schedutil/down_rate_limit_us",
+      "Path": "/sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us",
       "Values": [
         "20000",
         "5000",
@@ -14,7 +14,7 @@
     },
     {
       "Name": "CPUBigClusterDownRateLimitUs",
-      "Path": "/sys/devices/system/cpu/cpufreq/policy6/schedutil/down_rate_limit_us",
+      "Path": "/sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us",
       "Values": [
         "20000",
         "5000",
