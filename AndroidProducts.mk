@@ -6,7 +6,3 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/lineage_gale.mk
-
-#EvangeOS OFFICIAL
-
-COMMON_LUNCH_CHOICES += evange_gale-userdebug
