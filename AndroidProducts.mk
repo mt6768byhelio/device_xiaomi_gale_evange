@@ -5,7 +5,7 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_gale.mk
+    $(LOCAL_DIR)/Evange_gale.mk
 
 #EvangeOS OFFICIAL
 
